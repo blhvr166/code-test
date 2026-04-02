@@ -1,0 +1,248 @@
+/* Dashboard Styles */
+.container {
+  min-height: 100vh;
+  background: rgb(249 250 251);
+}
+
+.header {
+  background: white;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.headerContent {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .headerContent {
+    padding: 0 1.5rem 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .headerContent {
+    padding: 0 2rem 0 2rem;
+  }
+}
+
+.headerInner {
+  padding: 1.5rem 0;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: rgb(17 24 39);
+}
+
+@media (min-width: 640px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: rgb(107 114 128);
+}
+
+.main {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .main {
+    padding: 0 1.5rem 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main {
+    padding: 0 2rem 0 2rem;
+  }
+}
+
+.mainPadding {
+  padding-top: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  padding: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(17 24 39);
+  margin-bottom: 0.5rem;
+}
+
+.cardValue {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: rgb(59 130 246);
+}
+
+.cardDescription {
+  font-size: 0.875rem;
+  color: rgb(107 114 128);
+  margin-top: 0.5rem;
+}
+
+.triageCard {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .triageCard {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .triageCard {
+    grid-column: span 1;
+  }
+}
+
+.triageTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(17 24 39);
+  margin-bottom: 1rem;
+}
+
+.triageList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.triageItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.triageLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(55 65 81);
+}
+
+.triageRight {
+  text-align: right;
+}
+
+.triageCount {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(17 24 39);
+}
+
+.triageWait {
+  font-size: 0.75rem;
+  color: rgb(107 114 128);
+  margin: 0;
+}
+
+.footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.footerText {
+  font-size: 0.875rem;
+  color: rgb(107 114 128);
+}
+
+.footerSubtext {
+  font-size: 0.75rem;
+  color: rgb(156 163 175);
+  margin-top: 0.25rem;
+}
+
+/* Loading and Error States */
+.loadingContainer {
+  min-height: 100vh;
+  background: rgb(249 250 251);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingContent {
+  text-align: center;
+}
+
+.spinner {
+  border-radius: 9999px;
+  height: 3rem;
+  width: 3rem;
+  border-top: 2px solid rgb(59 130 246);
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-left: 2px solid transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  margin-top: 1rem;
+  color: rgb(107 114 128);
+}
+
+.errorContainer {
+  min-height: 100vh;
+  background: rgb(249 250 251);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorContent {
+  text-align: center;
+}
+
+.errorText {
+  color: rgb(239 68 68);
+}
+
+.errorDescription {
+  color: rgb(107 114 128);
+  margin-top: 0.5rem;
+}
