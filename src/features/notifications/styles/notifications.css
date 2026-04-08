@@ -1,0 +1,171 @@
+.notificationFeature {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.notificationButton .actionButtonBackground {
+  background-color: rgba(19, 91, 236, 0.2);
+  color: #135bec;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background-color: rgba(239, 68, 68, 1);
+  color: rgba(255, 255, 255, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.21px;
+  text-align: center;
+  padding-top: 1.5px;
+  padding-bottom: 2.5px;
+}
+
+.notificationsPopover {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 48px;
+  width: 320px;
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 1px;
+  box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  z-index: 120;
+  height: auto;
+  overflow: hidden;
+  overflow-x: hidden;
+}
+
+.notificationsPopoverExpanded {
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .notificationsPopover {
+    right: 0;
+  }
+}
+
+.notificationsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #374151;
+}
+
+.notificationsTitle {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.markAllReadButton {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #135bec;
+}
+
+.notificationsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.notificationsPopoverExpanded .notificationsList {
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.notificationRow {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 68px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-top: 1px solid #374151;
+}
+
+.notificationRowUnread {
+  background: rgba(19, 91, 236, 0.08);
+  border-left: 2px solid #135bec;
+}
+
+.notificationRowIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notificationRowContent {
+  flex: 1;
+}
+
+.notificationRowText {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #e5e7eb;
+  overflow-wrap: anywhere;
+}
+
+.notificationRowTime {
+  display: block;
+  margin-top: 2px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #9ca3af;
+}
+
+.viewAllNotificationsButton {
+  width: 100%;
+  box-sizing: border-box;
+  height: 37px;
+  border: none;
+  border-top: 1px solid #374151;
+  background: transparent;
+  padding: 9px 8px 8px 8px;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #135bec;
+}
+
+@media (max-width: 768px) {
+  .notificationsPopover {
+    right: 0;
+  }
+}

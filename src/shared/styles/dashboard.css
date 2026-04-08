@@ -1,203 +1,156 @@
-/* Dashboard Styles */
+/* Dashboard Styles - Scalable CSS */
+
+:root {
+  --dashboard-bg: #0f172a;
+  --dashboard-card-bg: rgba(17, 24, 39, 0.5);
+  --dashboard-text: #f1f5f9;
+  --dashboard-text-secondary: rgba(156, 163, 175, 1);
+  --dashboard-border: rgba(31, 41, 55, 1);
+  --dashboard-max-width: 1280px;
+}
+
 .container {
-  min-height: 100vh;
-  background: rgb(249 250 251);
+  min-height: 1135px;
+  width: 100%;
+  background: var(--dashboard-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px;
 }
 
 .header {
-  background: white;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  background: transparent;
+  border-bottom: none;
 }
 
 .headerContent {
-  max-width: 80rem;
+  max-width: var(--dashboard-max-width);
   margin: 0 auto;
-  padding: 0 1rem 0 1rem;
-}
-
-@media (min-width: 640px) {
-  .headerContent {
-    padding: 0 1.5rem 0 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .headerContent {
-    padding: 0 2rem 0 2rem;
-  }
+  padding: 16px;
+  width: 100%;
+  min-height: 109px;
 }
 
 .headerInner {
-  padding: 1.5rem 0;
+  min-width: 288px;
+  width: 288px;
+  min-height: 77px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.title {
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: rgb(17 24 39);
+.headerInner .headingPrimary {
+  font-size: 35.7px;
+  line-height: 45px;
+  letter-spacing: -1.19px;
+  margin: 0;
 }
 
-@media (min-width: 640px) {
-  .title {
-    font-size: 3rem;
-  }
-}
-
-.subtitle {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  color: rgb(107 114 128);
+.headerInner .descriptionPrimary {
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(156, 163, 175, 1);
+  margin: 0;
 }
 
 .main {
-  max-width: 80rem;
+  max-width: var(--dashboard-max-width);
   margin: 0 auto;
-  padding: 0 1rem 0 1rem;
-}
-
-@media (min-width: 640px) {
-  .main {
-    padding: 0 1.5rem 0 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .main {
-    padding: 0 2rem 0 2rem;
-  }
+  padding: 0;
+  width: 100%;
+  flex: 1;
 }
 
 .mainPadding {
-  padding-top: 2rem;
+  padding-top: 24px;
+  padding-bottom: 32px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 1024px) {
   .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
 .card {
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  padding: 1.5rem;
+  background: var(--dashboard-card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--dashboard-border);
+  width: 100%;
+  min-height: 214px;
+  padding: 25px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--dashboard-border);
+}
+
+.cardHeadingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cardIcon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cardTitle {
-  font-size: 1.125rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
   font-weight: 600;
-  color: rgb(17 24 39);
-  margin-bottom: 0.5rem;
+  line-height: 28px;
+  color: rgba(255, 255, 255, 1);
+  margin: 0;
+  letter-spacing: 0;
 }
 
 .cardValue {
-  font-size: 1.875rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 72px;
   font-weight: 700;
-  color: rgb(59 130 246);
+  line-height: 72px;
+  letter-spacing: -3.6px;
+  color: rgba(255, 255, 255, 1);
 }
 
 .cardDescription {
-  font-size: 0.875rem;
-  color: rgb(107 114 128);
-  margin-top: 0.5rem;
-}
-
-.triageCard {
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  padding: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .triageCard {
-    grid-column: span 2;
-  }
-}
-
-@media (min-width: 1024px) {
-  .triageCard {
-    grid-column: span 1;
-  }
-}
-
-.triageTitle {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: rgb(17 24 39);
-  margin-bottom: 1rem;
-}
-
-.triageList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.triageItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.triageLabel {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: rgb(55 65 81);
-}
-
-.triageRight {
-  text-align: right;
-}
-
-.triageCount {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: rgb(17 24 39);
-}
-
-.triageWait {
-  font-size: 0.75rem;
-  color: rgb(107 114 128);
-  margin: 0;
-}
-
-.footer {
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.footerText {
-  font-size: 0.875rem;
-  color: rgb(107 114 128);
-}
-
-.footerSubtext {
-  font-size: 0.75rem;
-  color: rgb(156 163 175);
-  margin-top: 0.25rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgba(156, 163, 175, 1);
+  margin-top: 16px;
 }
 
 /* Loading and Error States */
 .loadingContainer {
   min-height: 100vh;
-  background: rgb(249 250 251);
+  background: var(--dashboard-bg);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: var(--notif-width);
+}
+
+@media (max-width: 1024px) {
+  .loadingContainer {
+    margin-right: 0;
+  }
 }
 
 .loadingContent {
@@ -208,7 +161,7 @@
   border-radius: 9999px;
   height: 3rem;
   width: 3rem;
-  border-top: 2px solid rgb(59 130 246);
+  border-top: 2px solid var(--dashboard-accent);
   border-right: 2px solid transparent;
   border-bottom: 2px solid transparent;
   border-left: 2px solid transparent;
@@ -223,15 +176,22 @@
 
 .loadingText {
   margin-top: 1rem;
-  color: rgb(107 114 128);
+  color: var(--dashboard-text-secondary);
 }
 
 .errorContainer {
   min-height: 100vh;
-  background: rgb(249 250 251);
+  background: var(--dashboard-bg);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: var(--notif-width);
+}
+
+@media (max-width: 1024px) {
+  .errorContainer {
+    margin-right: 0;
+  }
 }
 
 .errorContent {
@@ -239,10 +199,12 @@
 }
 
 .errorText {
-  color: rgb(239 68 68);
+  color: #ef4444;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .errorDescription {
-  color: rgb(107 114 128);
+  color: var(--dashboard-text-secondary);
   margin-top: 0.5rem;
 }

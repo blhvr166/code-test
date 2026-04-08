@@ -8,23 +8,6 @@ export async function GET() {
   const waitTimes = {
     averageWaitTime: baseWaitTime,
     currentPatients: patientCount,
-    triageStats: [
-      {
-        level: 1,
-        count: Math.floor(Math.random() * 3) + 1, // 1-3 critical patients
-        avgWait: Math.floor(baseWaitTime * 0.2) // 20% of average
-      },
-      {
-        level: 2,
-        count: Math.floor(Math.random() * 5) + 2, // 2-6 urgent patients
-        avgWait: Math.floor(baseWaitTime * 0.6) // 60% of average
-      },
-      {
-        level: 3,
-        count: Math.floor(Math.random() * 8) + 3, // 3-10 stable patients
-        avgWait: Math.floor(baseWaitTime * 1.2) // 120% of average
-      },
-    ],
     lastUpdated: new Date().toISOString(),
   };
 

@@ -1,135 +1,197 @@
 # ER CareView Dashboard
 
+A Next.js-based emergency room dashboard focused on clarity, accessibility, and maintainability.
+
 ## Overview
 
-This project implements a real-time emergency room dashboard that provides visibility into patient wait times across different priority levels.
+This application provides a real-time view of emergency room statistics, including wait times and patient counts across different priority levels.
 
-The goal is to present key operational metrics in a clear, accessible, and responsive interface that supports quick decision-making in a high-pressure environment.
+It is designed to support quick decision-making in a high-pressure environment, with automatic data updates and a responsive interface.
 
-The dashboard automatically refreshes data every 30 seconds and displays:
+## What It Does
 
-* Critical patients (high priority)
-* Urgent patients (medium priority)
-* Standard patients (lower priority)
+- Shows live emergency room statistics including wait times and patient counts
+- Updates data automatically every 2 minutes
+- Provides a real-time notification center for wait-time updates with unread states
+- Works well on mobile and desktop devices
+- Designed with accessibility in mind for screen readers and keyboard navigation
+- Built with attention to rendering behaviour and avoiding unnecessary updates
+- Fully typed with TypeScript for better code reliability
+- Thoroughly tested with 11 test cases
 
----
+## Current Design and UX
 
-## Why this project
+- Dark healthcare-focused visual theme with clear typography and contrast
+- Sticky top navigation with active-route highlighting
+- Dashboard summary cards with icon-based visual hierarchy
+- Triage process timeline section with clear step-by-step guidance
+- Notification popover with:
+	- unread badges
+	- mark-all-read behavior
+	- expand-to-view-all behavior
+	- maximum height with internal scrolling
+- Responsive layouts across desktop, tablet, and mobile breakpoints
 
-Emergency departments require fast access to accurate, up-to-date information. This dashboard provides a simple, at-a-glance view of wait times to help staff:
+## Technology Used
 
-* prioritise patient care
-* understand current load
-* make informed operational decisions
+- **Framework**: Next.js with App Router and React
+- **Language**: TypeScript 5 with strict type checking
+- **Data Management**: TanStack Query for efficient data fetching and caching
+- **Styling**: Regular CSS with feature-level and shared style layers
+- **Testing**: Jest with React Testing Library
+- **Build Tool**: Turbopack (built into Next.js)
+- **Package Manager**: npm
 
----
+## Project Organization
 
-## Key Features
-
-### Real-time updates
-
-* Data is refreshed automatically every 30 seconds using TanStack Query
-* No manual refresh required
-* Includes a "last updated" indicator for data transparency
-
----
-
-### Responsive and clear UI
-
-* Designed for quick scanning in time-sensitive environments
-* Works across desktop, tablet, and mobile
-* Consistent visual hierarchy for key metrics
-
----
-
-### Loading and error handling
-
-* Dedicated loading states for better user feedback
-* Clear error states with user-friendly messages
-* Graceful handling of failed API requests
-
----
-
-### Accessibility considerations
-
-* Semantic HTML structure (headings, sections)
-* Keyboard-accessible interactions
-* ARIA live region for dynamic updates
-* Readable contrast and clear content hierarchy
-
----
-
-## Technology Stack
-
-* **Next.js** – application framework
-* **React** – UI components
-* **TypeScript** – type safety
-* **TanStack Query** – server state management and caching
-* **Jest + React Testing Library** – testing
-
----
-
-## Project Structure
-
-```text
+```
 src/
-  app/                  # pages and API routes
-  features/dashboard/   # dashboard feature logic and components
-  shared/               # reusable components and utilities
-  tests/                # test suite
+├── app/                          # Next.js routing and API endpoints
+│   ├── api/wait-times/           # Mock API for wait time data
+│   ├── dashboard/                # Main dashboard page
+│   ├── patient-search/           # Patient search route shell
+│   ├── staff-directory/          # Staff directory route shell
+│   ├── reports/                  # Reports route shell
+│   ├── globals.css               # Global styles and design tokens
+│   ├── layout.tsx                # Main layout with providers and navigation
+│   └── page.tsx                  # Homepage that redirects to dashboard
+├── features/
+│   ├── dashboard/                # Dashboard domain (components, hooks, API, types)
+│   ├── navigation/               # Navigation domain
+│   └── notifications/            # Notifications domain
+├── shared/                       # Reusable cross-feature code
+│   ├── components/               # Shared UI components
+│   ├── hooks/                    # Shared hooks
+│   ├── styles/                   # Shared CSS
+│   └── utils/                    # Shared helper functions
+└── tests/                        # Feature-oriented tests
 ```
 
----
+## Routes
 
-## Running the project
+- `/` redirects to `/dashboard`
+- `/dashboard` main ER dashboard
+- `/patient-search` route shell page
+- `/staff-directory` route shell page
+- `/reports` route shell page
+- `/api/wait-times` mock wait-time API endpoint
 
-### Install dependencies
+## Technical Decisions
 
+The implementation prioritises clarity and separation of concerns over feature breadth, aligning with the time constraints of the assessment while still demonstrating production-ready patterns.
+
+### Feature-Based Organization
+The code is organized by feature domain rather than file type. This keeps related UI, hooks, API clients, and types together, which scales well as features grow.
+
+### Regular CSS Instead of CSS-in-JS
+We use regular CSS files for predictable runtime performance and easier debugging. Styles are split by feature and shared layers for maintainability.
+
+### TanStack Query for Data
+TanStack Query handles caching, polling, loading/error states, and refetch behavior. Wait-time data refreshes every 2 minutes to keep the dashboard current.
+
+### Accessibility Considerations
+The app uses semantic HTML, ARIA labels, live regions, keyboard interactions (including Escape to close notifications), and route indication with `aria-current`.
+
+### Performance Focus
+We use memoized components, stable external-store time updates (`useNow`), and reducer-driven notification state to minimize unnecessary rerenders and hydration drift.
+
+## Testing Approach
+
+We have comprehensive tests covering:
+- Data-fetching hook behavior in loading, success, and error scenarios
+- Dashboard rendering and polling-driven updates
+- Notification UI interactions including unread badge behavior and keyboard dismissal
+
+We use Jest for running tests and React Testing Library for validating user-visible behavior.
+
+## Submission Checklist
+
+- Feature-based architecture implemented
+- Scalable CSS structure implemented
+- Basic accessibility coverage included
+- Real tests included and passing
+- Lint, test, and production build all pass
+
+## Getting Started
+
+### What You Need
+- Node.js version 18 or higher
+- npm (comes with Node.js)
+
+### Installation
 ```bash
 npm install
 ```
 
-### Start development server
-
+### Development
 ```bash
 npm run dev
 ```
 
-Open:
-http://localhost:3000/dashboard
+Open [http://localhost:3000/dashboard](http://localhost:3000/dashboard)
 
----
-
-## Running tests
-
+### Testing
 ```bash
-npm test
+npm test -- --runInBand
 ```
 
-The test suite covers:
+### Production Build
+```bash
+npm run build
+```
 
-* rendering of dashboard data
-* loading and error states
-* user interaction behaviour
+## API Details
+
+The app includes a mock API endpoint:
+
+**GET /api/wait-times**
+
+Returns data in the shape:
+```json
+{
+	"averageWaitTime": 45,
+	"currentPatients": 12,
+	"lastUpdated": "2026-04-08T10:00:00.000Z"
+}
+```
+
+## Assessment Requirements Met
+
+### Clean, Scalable Code
+- Feature-based architecture with clear boundaries
+- Shared hooks/utilities for cross-feature concerns
+- Full TypeScript coverage across app code
+- Predictable and maintainable state patterns
+
+### Strong Component Design
+- Components have clear responsibilities and small surfaces
+- Custom hooks isolate business logic from UI
+- Shared shell/components reduce duplication
+- Memoization applied where it improves render behavior
+
+### Good Testing Practices
+- 11 automated tests covering hooks and components
+- Polling/refetch behavior tested with fake timers
+- Notification interactions and accessibility behavior tested
+- Tests organized by feature area
+
+### Performance and Accessibility
+- Stable render patterns to avoid hydration drift
+- Efficient server-state handling with caching and polling
+- Semantic HTML and ARIA attributes across core UI
+- Keyboard interactions supported in critical components
+
+### Clear Documentation
+- This README explains architecture and decisions
+- Setup, test, and build commands are explicit
+- API behavior is documented
+
+## Future Improvements
+- Staff lookup and patient search can evolve from route shells to full domains
+- Notification persistence/history can be added using server storage
+- Observability can be enhanced with telemetry and error tracking integrations
+- CI quality gates can enforce lint/test/build on every pull request
 
 ---
 
-## Performance considerations
-
-* Server state is managed via TanStack Query to reduce unnecessary requests
-* UI updates are scoped to relevant components
-* Simple component structure avoids unnecessary complexity
-
----
-
-## Notes
-
-This implementation is intentionally scoped to align with the assessment time constraint, focusing on:
-
-* clean architecture
-* predictable data flow
-* maintainability and clarity
-
----
-
-Built as part of a technical assessment using modern React and Next.js patterns.
+Built for healthcare technology assessment with modern React patterns.

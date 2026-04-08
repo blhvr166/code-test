@@ -1,0 +1,239 @@
+/* Navigation Styles - Scalable CSS */
+
+:root {
+  --nav-bg: #0f172a;
+  --nav-border: rgba(148, 163, 184, 0.15);
+  --nav-padding: 18px;
+  --title-color: #f3f4f6;
+  --title-font: 'Manrope', sans-serif;
+  --title-size: 18px;
+  --title-line-height: 22.5px;
+  --nav-item-font: 'Manrope', sans-serif;
+  --nav-item-size: 14px;
+  --nav-item-line-height: 21px;
+  --nav-item-active: #135bec;
+  --nav-item-inactive: #d1d5db;
+  --nav-gap: 32px;
+  --icon-size: 40px;
+  --icon-radius: 12px;
+  --icon-bg: rgba(19, 91, 236, 0.2);
+  --settings-bg: rgba(255, 255, 255, 0.1);
+  --badge-size: 20px;
+  --badge-color: #ef4444;
+  --badge-text: #ffffff;
+}
+
+.navigation {
+  background-color: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: 65px;
+}
+
+.navContainer {
+  max-width: 100%;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 65px;
+}
+
+.navBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0 0 0;
+  height: 24px;
+}
+
+.navLogoWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.iconSvg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.brandText {
+  color: var(--title-color);
+  font-family: var(--title-font);
+  font-weight: 700;
+  font-size: var(--title-size);
+  line-height: var(--title-line-height);
+  letter-spacing: -0.27px;
+  white-space: nowrap;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  height: 40px;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.navList li {
+  margin: 0;
+}
+
+.navLink {
+  color: var(--nav-item-inactive);
+  font-family: var(--nav-item-font);
+  font-weight: 700;
+  font-size: var(--nav-item-size);
+  line-height: var(--nav-item-line-height);
+  letter-spacing: 0;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.navLinkActive {
+  color: var(--nav-item-active);
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--nav-item-active);
+}
+
+.iconGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 40px;
+  position: relative;
+}
+
+.actionButton {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButtonBackground {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  border-radius: var(--icon-radius);
+}
+
+.notificationButton .actionButtonBackground {
+  background-color: var(--icon-bg);
+  color: var(--nav-item-active);
+}
+
+.settingsButton .actionButtonBackground {
+  background-color: var(--settings-bg);
+  color: var(--title-color);
+}
+
+@media (max-width: 1024px) {
+  .navContainer {
+    min-height: auto;
+    padding: 10px 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .navBrand {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navActions {
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .navList {
+    flex: 1;
+    height: auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .navigation {
+    min-height: auto;
+  }
+
+  .navContainer {
+    padding: 10px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'brand icons'
+      'links links';
+    row-gap: 10px;
+    align-items: center;
+    min-height: auto;
+  }
+
+  .navBrand {
+    grid-area: brand;
+    width: auto;
+    justify-content: flex-start;
+  }
+
+  .navActions {
+    display: contents;
+    width: auto;
+  }
+
+  .iconGroup {
+    grid-area: icons;
+    justify-self: end;
+  }
+
+  .navList {
+    grid-area: links;
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+    height: auto;
+    flex-wrap: nowrap;
+  }
+
+  .navLink {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+}

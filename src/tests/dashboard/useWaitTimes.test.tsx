@@ -41,9 +41,6 @@ describe('useWaitTimes', () => {
     const mockData = {
       averageWaitTime: 45,
       currentPatients: 12,
-      triageStats: [
-        { level: 1, count: 2, avgWait: 10 },
-      ],
       lastUpdated: '2024-01-01T12:00:00Z',
     };
 
@@ -77,21 +74,19 @@ describe('useWaitTimes', () => {
     expect(result.current.error).toBeDefined();
   });
 
-  it('refetches data automatically after 30 seconds', async () => {
+  it('refetches data automatically after 2 minutes', async () => {
     // Use fake timers to control time
     jest.useFakeTimers();
 
     const initialData = {
       averageWaitTime: 45,
       currentPatients: 12,
-      triageStats: [{ level: 1, count: 2, avgWait: 10 }],
       lastUpdated: '2024-01-01T12:00:00Z',
     };
 
     const updatedData = {
       averageWaitTime: 60,
       currentPatients: 15,
-      triageStats: [{ level: 1, count: 3, avgWait: 15 }],
       lastUpdated: '2024-01-01T12:00:30Z',
     };
 
@@ -116,8 +111,8 @@ describe('useWaitTimes', () => {
       json: async () => updatedData,
     });
 
-    // Advance time by 30 seconds to trigger refetch
-    jest.advanceTimersByTime(30000);
+    // Advance time by 2 minutes to trigger refetch
+    jest.advanceTimersByTime(120000);
 
     // Wait for the data to update
     await waitFor(() => {

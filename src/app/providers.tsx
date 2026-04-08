@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  // Create QueryClient only once
+  // Keep a single QueryClient instance for the entire app lifecycle.
   const [queryClient] = useState(
     () => new QueryClient({
       defaultOptions: {
@@ -20,7 +20,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <ReactQueryDevtools initialIsOpen={false} />
+      {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   );
 }

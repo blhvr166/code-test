@@ -5,12 +5,15 @@ import { useWaitTimes } from '../hooks/useWaitTimes';
 import { StatCard } from './StatCard';
 import { DashboardSkeleton } from './DashboardSkeleton';
 import { DashboardError } from './DashboardError';
+import { TriageProcess } from '../../../shared/components/TriageProcess';
 import { formatMinutes } from '../../../shared/utils/formatMinutes';
-import { formatDateTime } from '../../../shared/utils/formatDateTime';
+import { formatTimeAgo } from '../../../shared/utils/formatTimeAgo';
+import { useNow } from '../../../shared/hooks/useNow';
 import '../../../shared/styles/dashboard.css';
 
 function DashboardStatsComponent() {
   const { data, isLoading, error } = useWaitTimes();
+  const now = useNow(30000);
 
   if (isLoading) {
     return <DashboardSkeleton />;
@@ -22,61 +25,38 @@ function DashboardStatsComponent() {
 
   return (
     <div className="container">
-      <header className="header" role="banner">
-        <div className="headerContent">
-          <div className="headerInner">
-            <h1 className="title">ER CareView Dashboard</h1>
-            <p className="subtitle" aria-live="polite">
-              Real-time emergency room statistics
-            </p>
-          </div>
-        </div>
-      </header>
-
-      <main className="main" role="main" aria-labelledby="dashboard-title">
-        <div className="mainPadding">
-          <div className="grid" role="region" aria-label="Emergency room statistics">
-            <StatCard
-              title="Average Wait Time"
-              value={formatMinutes(data?.averageWaitTime || 0)}
-              description="Across all patients"
-            />
-            <StatCard
-              title="Current Patients"
-              value={data?.currentPatients || 0}
-              description="In emergency room"
-            />
-            <div className="triageCard" role="region" aria-labelledby="triage-title">
-              <h2 id="triage-title" className="triageTitle">Triage Levels</h2>
-              <div className="triageList" role="list">
-                {data?.triageStats.map((stat) => (
-                  <div key={stat.level} className="triageItem" role="listitem">
-                    <span className="triageLabel" aria-label={`Triage level ${stat.level}`}>
-                      Level {stat.level}
-                    </span>
-                    <div className="triageRight">
-                      <div className="triageCount" aria-label={`${stat.count} patients at triage level ${stat.level}`}>
-                        {stat.count} patients
-                      </div>
-                      <p className="triageWait" aria-label={`Average wait time: ${formatMinutes(stat.avgWait)}`}>
-                        {formatMinutes(stat.avgWait)} avg
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+        <header className="header" role="banner">
+          <div className="headerContent">
+            <div className="headerInner">
+              <h1 className="headingPrimary">ER Wait Times</h1>
+              <p className="descriptionPrimary" aria-live="polite">
+                Last Updated: <span suppressHydrationWarning>{data ? formatTimeAgo(data.lastUpdated, now) : 'N/A'}</span>
+              </p>
             </div>
           </div>
+        </header>
 
-          <footer className="footer" role="contentinfo">
-            <p className="footerText" aria-live="polite" aria-label={`Last updated ${data ? formatDateTime(data.lastUpdated) : 'N/A'}`}>
-              Last updated: {data ? formatDateTime(data.lastUpdated) : 'N/A'}
-            </p>
-            <p className="footerSubtext">Data refreshes every 30 seconds</p>
-          </footer>
-        </div>
-      </main>
-    </div>
+        <main className="main" role="main" aria-labelledby="dashboard-title">
+          <div className="mainPadding">
+            <div className="grid" role="region" aria-label="Emergency room statistics">
+              <StatCard
+                title="Estimated Wait Time"
+                value={`${formatMinutes(data?.averageWaitTime || 0)}`}
+                description="This is the average time from arrival to being seen by a qualified medical professional"
+                icon="wait-time"
+              />
+              <StatCard
+                title="Patients Currently Waiting"
+                value={data?.currentPatients || 0}
+                description="This is the number of patients waiting to be seen and in treatment areas."
+                icon="patients"
+              />
+            </div>
+
+            <TriageProcess />
+          </div>
+        </main>
+      </div>
   );
 }
 

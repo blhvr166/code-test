@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DashboardStats } from '@/features/dashboard/components/DashboardStats';
 
@@ -43,10 +43,6 @@ describe('DashboardStats', () => {
     const mockData = {
       averageWaitTime: 45,
       currentPatients: 12,
-      triageStats: [
-        { level: 1, count: 2, avgWait: 10 },
-        { level: 2, count: 5, avgWait: 30 },
-      ],
       lastUpdated: '2024-01-01T12:00:00Z',
     };
 
@@ -58,13 +54,12 @@ describe('DashboardStats', () => {
     renderWithClient(client);
 
     await waitFor(() => {
-      expect(screen.getByText('ER CareView Dashboard')).toBeInTheDocument();
+      expect(screen.getByText('ER Wait Times')).toBeInTheDocument();
     });
 
     expect(screen.getByText('45 min')).toBeInTheDocument();
     expect(screen.getByText('12')).toBeInTheDocument();
-    expect(screen.getByText('Level 1')).toBeInTheDocument();
-    expect(screen.getByText('2 patients')).toBeInTheDocument();
+    expect(screen.getByText('How Our Triage Process Works')).toBeInTheDocument();
   });
 
   it('displays error state when fetch fails', async () => {
@@ -88,20 +83,12 @@ describe('DashboardStats', () => {
     const initialData = {
       averageWaitTime: 45,
       currentPatients: 12,
-      triageStats: [
-        { level: 1, count: 2, avgWait: 10 },
-        { level: 2, count: 5, avgWait: 30 },
-      ],
       lastUpdated: '2024-01-01T12:00:00Z',
     };
 
     const updatedData = {
       averageWaitTime: 75,
       currentPatients: 18,
-      triageStats: [
-        { level: 1, count: 4, avgWait: 20 },
-        { level: 2, count: 8, avgWait: 45 },
-      ],
       lastUpdated: '2024-01-01T12:00:30Z',
     };
 
@@ -119,7 +106,7 @@ describe('DashboardStats', () => {
     });
 
     expect(screen.getByText('12')).toBeInTheDocument();
-    expect(screen.getByText('2 patients')).toBeInTheDocument();
+    expect(screen.getByText('How Our Triage Process Works')).toBeInTheDocument();
 
     // Mock the refetch call
     (global.fetch as jest.Mock).mockResolvedValueOnce({
@@ -127,8 +114,10 @@ describe('DashboardStats', () => {
       json: async () => updatedData,
     });
 
-    // Advance time by 30 seconds to trigger refetch
-    jest.advanceTimersByTime(30000);
+    // Advance time by 2 minutes to trigger refetch
+    act(() => {
+      jest.advanceTimersByTime(120000);
+    });
 
     // Wait for the UI to update with new data
     await waitFor(() => {
@@ -136,7 +125,7 @@ describe('DashboardStats', () => {
     });
 
     expect(screen.getByText('18')).toBeInTheDocument();
-    expect(screen.getByText('4 patients')).toBeInTheDocument();
+    expect(screen.getByText('How Our Triage Process Works')).toBeInTheDocument();
 
     // Restore real timers
     jest.useRealTimers();

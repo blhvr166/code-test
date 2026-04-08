@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "./providers";
 import { ErrorBoundary } from "../shared/components/ErrorBoundary";
+import { ClientOnly } from "../shared/components/ClientOnly";
+import { Navigation } from "../features/navigation/components/Navigation";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,7 +33,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ErrorBoundary>
-          <Providers>{children}</Providers>
+          <Providers>
+            <ClientOnly>
+              <Navigation />
+            </ClientOnly>
+            {children}
+          </Providers>
         </ErrorBoundary>
       </body>
     </html>
